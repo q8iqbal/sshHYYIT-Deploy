@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  mongo:
+    container_name: mongo-service
+    image: mongo
+    volumes:
+      -./mongo-storage:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: yayang
+      MONGO_INITDB_ROOT_PASSWORD: yayang1
+  # frontend-service:
+  #   build: ./sshHYYIT-FE/FE.Dockerfile
+  #   container_name: fe-service
+  #   port:
+  #     -80:80
+  backend-service:
+    build: ./sshHYYIT-BE/Dockerfile
+    container_name: be-service
+    port:
+      -8080:8080
+    environment:
+      -MONGOURI=mongodb://yayang:yayang1@mongo:27017/admin
+
